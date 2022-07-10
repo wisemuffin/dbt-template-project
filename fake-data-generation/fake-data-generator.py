@@ -13,12 +13,13 @@ from faker_music import MusicProvider
 EMPLOYEES = random.randint(2,4)
 ACTIVATIONS = random.randint(45,175)
 DEACTIVATIONS = random.randint(5,20)
+CONTENT = 30
 
 BACKFILL_DAYS = 2 # number of days to backfill_DAYS
 
 skill_provider = DynamicProvider(
      provider_name="skills",
-     elements=["Python", "Pandas", "Linux", "SQL", "Data Mining"],
+     elements=["Big Ears", "Sining", "Song Writing", "Being Cool", "Big a Brain"],
 )
 
 subscription_type_provider = DynamicProvider(
@@ -36,16 +37,20 @@ web_event_type_provider = DynamicProvider(
      elements=OrderedDict([("content_viewed",0.80), ("pricing_viewed", 0.05), ("content_shared", 0.05), ("comment_posted",0.1)]),
 )
 
-def fake_data_generation_content(current_timestamp, records):
+def fake_data_generation_content(current_timestamp, records, fake_data_employees):
     fake = Faker('en_AU')
 
     fake.add_provider(MusicProvider)
     
     content = []
+
+    len_emp = len(fake_data_employees)
+    
     
     fake.add_provider(skill_provider)
 
     for i in range(records):
+        rnd_emp = random.randint(0, len_emp-1)
 
         content.append({
                 "Content Name": fake.word(),
@@ -53,7 +58,8 @@ def fake_data_generation_content(current_timestamp, records):
                 "Genre": fake.music_genre(),
                 "Sub Genre": fake.music_subgenre(),
                 "Instrument": fake.music_instrument(),
-                "Instrument Category": fake.music_instrument_category()
+                "Instrument Category": fake.music_instrument_category(),
+                "Employee Id": fake_data_employees[rnd_emp]['Employee ID']
                 })
         
     return content
@@ -163,7 +169,7 @@ def fake_data_web_events(current_timestamp, records, content):
                     "Event Start": event_start,
                     "Event End": event_start + datetime.timedelta(seconds=n*60) if event_type == 'content_viewed' else None,
                     "Web Event Type": event_type,
-                    "Content": content[random.randint(0,content_len-1)]['Content ID'] if 'content' in event_type else None
+                    "Content ID": content[random.randint(0,content_len-1)]['Content ID'] if 'content' in event_type else None
                     })
         
     return web_events
@@ -174,8 +180,8 @@ for i in range(BACKFILL_DAYS):
 
     current_execution_timestamp = datetime.datetime.now() - datetime.timedelta(days=i)
 
-    fake_content = fake_data_generation_content(current_execution_timestamp, 30)
     fake_data_employees = fake_data_generation_employees(current_execution_timestamp, EMPLOYEES)
+    fake_content = fake_data_generation_content(current_execution_timestamp, CONTENT, fake_data_employees)
     fake_sub_activate = fake_data_generation_subscription_events(current_execution_timestamp, ACTIVATIONS)
     fake_sub_deactivate = fake_data_generation_subscription_deactivate_events(current_execution_timestamp, fake_sub_activate[0:DEACTIVATIONS])
     fake_web_events = fake_data_web_events(current_execution_timestamp, fake_sub_activate, fake_content)
