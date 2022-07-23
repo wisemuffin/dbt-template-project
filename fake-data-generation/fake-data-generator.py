@@ -59,7 +59,7 @@ def fake_data_generation_content(current_timestamp, records, fake_data_employees
                 "Sub Genre": fake.music_subgenre(),
                 "Instrument": fake.music_instrument(),
                 "Instrument Category": fake.music_instrument_category(),
-                "Employee Id": fake_data_employees[rnd_emp]['Employee ID']
+                "Email": fake_data_employees[rnd_emp]['Email']
                 })
         
     return content
@@ -173,6 +173,7 @@ def fake_data_web_events(current_timestamp, records, content):
                     })
         
     return web_events
+
 
 # %%
 

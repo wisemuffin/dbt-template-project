@@ -19,6 +19,11 @@ aws s3 mb s3://${bucket} --region ap-southeast-2;
 aws s3 cp fake-data-generation/fake-data/ s3://${bucket} --recursive;
 ```
 
+clean up
+```bash
+aws s3 rm s3://${bucket} --recursive
+```
+
 # Data Warehouse
 
 ```bash
@@ -57,3 +62,7 @@ pattern of files to replicate
 *fake_sub_activate*.csv
 *fake_sub_deactivate*.csv
 *fake_web_events*.csv
+
+# Data Orchistration
+
+See data-orchistration/README.md
