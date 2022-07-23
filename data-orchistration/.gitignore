@@ -1,0 +1,5 @@
+tmp*/
+*.egg-info
+build/
+__pycache__
+dagster-local-file-store/*
