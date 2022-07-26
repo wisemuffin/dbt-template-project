@@ -25,7 +25,9 @@ setup(
         "scipy",
         "dbt-core",
         "dbt-postgres",
-        "awswrangler"
+        "awswrangler",
+        "faker",
+        "faker_music"
     ],
     extras_require={"tests": ["mypy", "pylint", "pytest"]},
 )

@@ -16,7 +16,7 @@ from dagster.core.execution.with_resources import with_resources
 
 from modern_data_stack_assets.constants import *  # pylint: disable=wildcard-import,unused-wildcard-import
 from modern_data_stack_assets.pandas_io_manager import pandas_io_manager
-from modern_data_stack_assets.assets_fake_source_systems import fake_website, fake_workday
+from modern_data_stack_assets.assets_fake_source_systems import fake_website, fake_workday, fake_data_generation
 
 # # airbyte fake_content
 # # Note issue - i cant use build_airbyte_assets to add input dependencies

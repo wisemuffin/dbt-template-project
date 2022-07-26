@@ -7,6 +7,14 @@ from dagster.utils import file_relative_path
 
 from modern_data_stack_assets.constants import S3_FAKE_DATA_CONFIG,LOCAL_FAKE_DATA_PATH
 
+from fake_data_generator import generate_fake_data
+
+@asset(compute_kind="python")
+def fake_data_generation():
+    """Model parameters that best fit the observed data"""
+    generate_fake_data()
+
+
 """
 This example show how to turn the s3 session for an op into an asset materialization
 
@@ -42,7 +50,7 @@ def get_website_data(context, bucket, path, file_partition):
     )
 
 @asset(required_resource_keys={'s3'}, compute_kind="aws cli")
-def fake_website(context):
+def fake_website(context,fake_data_generation):
     """contains movie content, and web events"""
 
     bucket = 'dbt-template-project-data'
@@ -55,7 +63,7 @@ def fake_website(context):
     
 
 @asset(required_resource_keys={'s3'}, compute_kind="aws cli")
-def fake_workday(context):
+def fake_workday(context, fake_data_generation):
     """contains HR data"""
 
     bucket = 'dbt-template-project-data'

@@ -4,6 +4,7 @@
 # Nice to do
 - currently using s3 client has no type hints. Could use https://pypi.org/project/boto3-stubs/
 - simplify airbyte dependencies
+- make the fake data generator `path_to_fake_data` dynamic
 
 ## simplify airbyte dependencies
 
@@ -19,7 +20,7 @@ Generates a bunch of csv files in `fake-data-generation/fake-data/` related to o
 ```bash
 cd fake-data-generation
 pipenv install
-python fake-data-generator.py
+python generate_fake_data.py
 ```
 
 

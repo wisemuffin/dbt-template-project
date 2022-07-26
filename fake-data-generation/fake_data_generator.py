@@ -1,4 +1,7 @@
 # %%
+import os
+import glob
+
 from collections import OrderedDict
 import csv
 # from datetime import datetime, date, timedelta
@@ -16,6 +19,9 @@ DEACTIVATIONS = random.randint(5,20)
 CONTENT = 30
 
 BACKFILL_DAYS = 2 # number of days to backfill_DAYS
+
+PATH_TO_FAKE_DATA = '/home/dave/data-engineering/dbt-template-project/fake-data-generation/fake-data'
+
 
 skill_provider = DynamicProvider(
      provider_name="skills",
@@ -174,35 +180,47 @@ def fake_data_web_events(current_timestamp, records, content):
         
     return web_events
 
+def remove_fake_old_data():
+    files = glob.glob(f'{PATH_TO_FAKE_DATA}/*.csv')
+
+    for f in files:
+        try:
+            # f.unlink()
+            os.remove(f)
+        except OSError as e:
+            print("Error: %s : %s" % (f, e.strerror))
+
+# %%
+def generate_fake_data():
+    remove_fake_old_data()
+    for i in range(BACKFILL_DAYS):
+
+        current_execution_timestamp = datetime.datetime.now() - datetime.timedelta(days=i)
+
+        fake_data_employees = fake_data_generation_employees(current_execution_timestamp, EMPLOYEES)
+        fake_content = fake_data_generation_content(current_execution_timestamp, CONTENT, fake_data_employees)
+        fake_sub_activate = fake_data_generation_subscription_events(current_execution_timestamp, ACTIVATIONS)
+        fake_sub_deactivate = fake_data_generation_subscription_deactivate_events(current_execution_timestamp, fake_sub_activate[0:DEACTIVATIONS])
+        fake_web_events = fake_data_web_events(current_execution_timestamp, fake_sub_activate, fake_content)
+
+        file_partition = current_execution_timestamp.strftime("%Y%m%dT%H%M%S")
+
+        df_fake_content = pd.DataFrame(fake_content)
+        df_fake_data_employees = pd.DataFrame(fake_data_employees)
+        df_fake_sub_activate = pd.DataFrame(fake_sub_activate)
+        df_fake_sub_deactivate= pd.DataFrame(fake_sub_deactivate)
+        df_fake_web_events = pd.DataFrame(fake_web_events)
+
+        # df_fake_web_events.head()
+
+
+        df_fake_content.to_csv(f'{PATH_TO_FAKE_DATA}/fake_content_{file_partition}.csv', index=False)
+        df_fake_data_employees.to_csv(f'{PATH_TO_FAKE_DATA}/fake_data_employees_{file_partition}.csv', index=False)
+        df_fake_sub_activate.to_csv(f'{PATH_TO_FAKE_DATA}/fake_sub_activate_{file_partition}.csv', index=False)
+        df_fake_sub_deactivate.to_csv(f'{PATH_TO_FAKE_DATA}/fake_sub_deactivate_{file_partition}.csv', index=False)
+        df_fake_web_events.to_csv(f'{PATH_TO_FAKE_DATA}/fake_web_events_{file_partition}.csv', index=False)
 
 # %%
 
-for i in range(BACKFILL_DAYS):
-
-    current_execution_timestamp = datetime.datetime.now() - datetime.timedelta(days=i)
-
-    fake_data_employees = fake_data_generation_employees(current_execution_timestamp, EMPLOYEES)
-    fake_content = fake_data_generation_content(current_execution_timestamp, CONTENT, fake_data_employees)
-    fake_sub_activate = fake_data_generation_subscription_events(current_execution_timestamp, ACTIVATIONS)
-    fake_sub_deactivate = fake_data_generation_subscription_deactivate_events(current_execution_timestamp, fake_sub_activate[0:DEACTIVATIONS])
-    fake_web_events = fake_data_web_events(current_execution_timestamp, fake_sub_activate, fake_content)
-
-    file_partition = current_execution_timestamp.strftime("%Y%m%dT%H%M%S")
-
-    df_fake_content = pd.DataFrame(fake_content)
-    df_fake_data_employees = pd.DataFrame(fake_data_employees)
-    df_fake_sub_activate = pd.DataFrame(fake_sub_activate)
-    df_fake_sub_deactivate= pd.DataFrame(fake_sub_deactivate)
-    df_fake_web_events = pd.DataFrame(fake_web_events)
-
-    # df_fake_web_events.head()
-
-    df_fake_content.to_csv(f'./fake-data/fake_content_{file_partition}.csv', index=False)
-    df_fake_data_employees.to_csv(f'./fake-data/fake_data_employees_{file_partition}.csv', index=False)
-    df_fake_sub_activate.to_csv(f'./fake-data/fake_sub_activate_{file_partition}.csv', index=False)
-    df_fake_sub_deactivate.to_csv(f'./fake-data/fake_sub_deactivate_{file_partition}.csv', index=False)
-    df_fake_web_events.to_csv(f'./fake-data/fake_web_events_{file_partition}.csv', index=False)
-
-# %%
-
-#######################
+if __name__ == '__main__':
+    generate_fake_data()
