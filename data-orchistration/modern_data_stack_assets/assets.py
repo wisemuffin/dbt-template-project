@@ -1,42 +1,85 @@
 from typing import Any, Tuple
+import dagster
+from modern_data_stack_assets.build_airbyte_assets_dg import build_airbyte_assets_dg
 
 import numpy as np
 import pandas as pd
 from dagster_airbyte import airbyte_resource, build_airbyte_assets
 from dagster_dbt import dbt_cli_resource, load_assets_from_dbt_project
+from dagster_aws.s3 import s3_resource
+import dagster._check as check
 from scipy import optimize
+from dagster_airbyte.utils import generate_materializations
 
-from dagster import asset, load_assets_from_current_module, repository, materialize
+from dagster import AssetIn, AssetKey, Out, Output, Set, asset, load_assets_from_current_module, multi_asset, repository, materialize
 from dagster.core.execution.with_resources import with_resources
 
 from modern_data_stack_assets.constants import *  # pylint: disable=wildcard-import,unused-wildcard-import
 from modern_data_stack_assets.pandas_io_manager import pandas_io_manager
+from modern_data_stack_assets.assets_fake_source_systems import fake_website, fake_workday
 
-airbyte_assets_content = build_airbyte_assets(
+# # airbyte fake_content
+# # Note issue - i cant use build_airbyte_assets to add input dependencies
+# # connection_id=AIRBYTE_CONNECTION_ID_FAKE_CONTENT
+# # destination_tables=["fake_content"]
+# # asset_key_prefix=["public"]
+
+# asset_key_prefix = check.opt_list_param(asset_key_prefix, "asset_key_prefix", of_type=str)
+
+# @multi_asset(
+#     name=f"airbyte_sync_{connection_id[:5]}",
+#     outs={
+#         table: Out(
+#             asset_key=AssetKey(
+#                 asset_key_prefix + [table],
+#             )
+#         )
+#         for table in destination_tables
+#     },
+#     required_resource_keys={"airbyte"},
+#     compute_kind="airbyte",
+# )
+# def fake_content(context, fake_website):
+#     ab_output = context.resources.airbyte.sync_and_poll(connection_id=connection_id)
+#     for materialization in generate_materializations(ab_output, asset_key_prefix):
+#         table_name = materialization.asset_key.path[-1]
+#         if table_name in destination_tables:
+#             yield Output(
+#                 value=None,
+#                 output_name=table_name,
+#                 metadata={
+#                     entry.label: entry.entry_data for entry in materialization.metadata_entries
+#                 },
+#             )
+#         else:
+#             yield materialization
+
+airbyte_assets_content = build_airbyte_assets_dg(
+    fake_website=fake_website,
     connection_id=AIRBYTE_CONNECTION_ID_FAKE_CONTENT,
     destination_tables=["fake_content"],
     asset_key_prefix=["public"],
 )
 
-airbyte_assets_employees = build_airbyte_assets(
+airbyte_assets_employees = build_airbyte_assets_dg(
     connection_id=AIRBYTE_CONNECTION_ID_FAKE_DATA_EMPLOYEES,
     destination_tables=["fake_data_employees"],
     asset_key_prefix=["public"],
 )
 
-airbyte_assets_sub_active = build_airbyte_assets(
+airbyte_assets_sub_active = build_airbyte_assets_dg(
     connection_id=AIRBYTE_CONNECTION_ID_FAKE_SUB_ACTIVE,
     destination_tables=["fake_sub_activate"],
     asset_key_prefix=["public"],
 )
 
-airbyte_assets_sub_deactivate = build_airbyte_assets(
+airbyte_assets_sub_deactivate = build_airbyte_assets_dg(
     connection_id=AIRBYTE_CONNECTION_ID_FAKE_SUB_DEACTIVATE,
     destination_tables=["fake_sub_deactivate"],
     asset_key_prefix=["public"],
 )
 
-airbyte_assets_web_events = build_airbyte_assets(
+airbyte_assets_web_events = build_airbyte_assets_dg(
     connection_id=AIRBYTE_CONNECTION_ID_FAKE_WEB_EVENTS,
     destination_tables=["fake_web_events"],
     asset_key_prefix=["public"],
@@ -45,6 +88,7 @@ airbyte_assets_web_events = build_airbyte_assets(
 dbt_assets = load_assets_from_dbt_project(
     project_dir=DBT_PROJECT_DIR, io_manager_key="pandas_io_manager", use_build_command=True
 )
+
 
 
 # @asset(compute_kind="python")
@@ -85,6 +129,7 @@ resource_defs = {
     "airbyte": airbyte_resource.configured(AIRBYTE_CONFIG),
     "dbt": dbt_cli_resource.configured(DBT_CONFIG),
     "pandas_io_manager": pandas_io_manager.configured(PANDAS_IO_CONFIG),
+    "s3": s3_resource.configured(S3_FAKE_DATA_CONFIG)
 }
 
 

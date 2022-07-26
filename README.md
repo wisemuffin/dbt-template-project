@@ -1,3 +1,17 @@
+# TODO
+- currently AWS S3 dagster software defined assets not available. So i am just building regular op and jobs.
+
+# Nice to do
+- currently using s3 client has no type hints. Could use https://pypi.org/project/boto3-stubs/
+- simplify airbyte dependencies
+
+## simplify airbyte dependencies
+
+the dagit airbyte software defined asset function doesnt support adding input dependencies via the function `build_airbyte_assets()`
+
+The work around is to generate the `AssetDefintion` for airbyte manually and pass input `AssetDefinition`. I couldnt alter `build_airbyte_assets()` to take an input `AssetDefinition` because the asset creation via `@Asset` decorator uses the params names e.g. *args instead of the original name of the `AssetDefinition`.
+
+
 # Fake data
 
 Generates a bunch of csv files in `fake-data-generation/fake-data/` related to our music subscription example project.

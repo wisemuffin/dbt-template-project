@@ -25,6 +25,7 @@ setup(
         "scipy",
         "dbt-core",
         "dbt-postgres",
+        "awswrangler"
     ],
     extras_require={"tests": ["mypy", "pylint", "pytest"]},
 )

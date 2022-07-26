@@ -35,7 +35,7 @@ PG_DESTINATION_CONFIG = {
 AIRBYTE_CONFIG = {"host": "localhost", "port": "8000"}
 DBT_PROJECT_DIR = file_relative_path(__file__, "../../dbt")
 DBT_PROFILES_DIR =  file_relative_path(__file__, "../../dbt/config")
-DBT_CONFIG = {"project_dir": DBT_PROJECT_DIR, "profiles_dir": DBT_PROFILES_DIR, "ignore_handled_error": True}
+DBT_CONFIG = {"project_dir": DBT_PROJECT_DIR, "profiles_dir": DBT_PROFILES_DIR, "ignore_handled_error": False}
 PANDAS_IO_CONFIG = {
     "con_string": get_conn_string(
         username=PG_DESTINATION_CONFIG["username"],
@@ -45,3 +45,8 @@ PANDAS_IO_CONFIG = {
         db_name=PG_DESTINATION_CONFIG["database"],
     )
 }
+S3_FAKE_DATA_CONFIG = {
+                    'region_name': 'ap-southeast-2',
+                    'profile_name': 'default'
+                }
+LOCAL_FAKE_DATA_PATH = file_relative_path(__file__, "../../fake-data-generation/fake-data/")

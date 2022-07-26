@@ -4,3 +4,6 @@ load_from:
       # Scopes down the repository to use in this Dagster deployment - this can be varied in
       # different environments to allow the same code to be used in different environments
       attribute: mds_repo
+  - python_file:
+      relative_path: modern_data_stack_assets/example/example_assets_s3.py
+      attribute: s3_example_repo
