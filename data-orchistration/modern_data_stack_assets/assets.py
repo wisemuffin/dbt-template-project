@@ -16,7 +16,7 @@ from dagster.core.execution.with_resources import with_resources
 
 from modern_data_stack_assets.constants import *  # pylint: disable=wildcard-import,unused-wildcard-import
 from modern_data_stack_assets.pandas_io_manager import pandas_io_manager
-from modern_data_stack_assets.assets_fake_source_systems import fake_website, fake_workday, fake_data_generation
+from modern_data_stack_assets.fake_source_system.assets.fake_source_systems import fake_website, fake_workday, fake_data_generation
 
 # # airbyte fake_content
 # # Note issue - i cant use build_airbyte_assets to add input dependencies
@@ -133,18 +133,18 @@ resource_defs = {
 }
 
 
-@repository
-def mds_repo():
-    from dagster import define_asset_job
+# @repository
+# def mds_repo():
+#     from dagster import define_asset_job
 
-    return with_resources(
-        load_assets_from_current_module(),
-        resource_defs=resource_defs,
-    ) + [define_asset_job("all")]
+#     return with_resources(
+#         load_assets_from_current_module(),
+#         resource_defs=resource_defs,
+#     ) + [define_asset_job("all")]
 
-if __name__ == "__main__":
-    assets_to_load = with_resources(
-        load_assets_from_current_module(),
-        resource_defs=resource_defs,
-    )
-    materialize(assets_to_load)
+# if __name__ == "__main__":
+#     assets_to_load = with_resources(
+#         load_assets_from_current_module(),
+#         resource_defs=resource_defs,
+#     )
+#     materialize(assets_to_load)

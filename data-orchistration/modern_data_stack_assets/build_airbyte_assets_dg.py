@@ -7,7 +7,7 @@ from dagster import _check as check
 from dagster.core.definitions import AssetsDefinition, multi_asset
 from dagster.utils.backcompat import experimental
 
-from modern_data_stack_assets.assets_fake_source_systems import fake_website, fake_workday
+from modern_data_stack_assets.fake_source_system.assets.fake_source_systems import fake_website, fake_workday
 
 
 """

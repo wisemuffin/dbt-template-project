@@ -50,3 +50,4 @@ S3_FAKE_DATA_CONFIG = {
                     'profile_name': 'default'
                 }
 LOCAL_FAKE_DATA_PATH = file_relative_path(__file__, "../../fake-data-generation/fake-data/")
+

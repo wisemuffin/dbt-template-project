@@ -10,16 +10,16 @@ with source as (
         experience,
          "First Name",
         "Start Date",
-        nationality,
-        _ab_source_file_url,
+        nationality
+        {# _ab_source_file_url,
         _ab_additional_properties,
         _ab_source_file_last_modified,
         _airbyte_ab_id,
         _airbyte_emitted_at,
         _airbyte_normalized_at,
         _airbyte_fake_data_employees_hashid,
-        _airbyte_unique_key
-    from {{ source('public', 'fake_data_employees') }}
+        _airbyte_unique_key #}
+    from {{ source('workday', 'data_employees') }}
 )
 , renamed as (
     select 

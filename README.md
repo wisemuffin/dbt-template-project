@@ -1,7 +1,10 @@
 # TODO
-- currently AWS S3 dagster software defined assets not available. So i am just building regular op and jobs.
+- sometimes getting failures due to locks on duckdb - look for retry logic
+- airbyte dagster have removed for now - will add in for other API data
+- add in hacker news
+- clean up repo for orchistration
 
-# Nice to do
+## Nice to do
 - currently using s3 client has no type hints. Could use https://pypi.org/project/boto3-stubs/
 - simplify airbyte dependencies
 - make the fake data generator `path_to_fake_data` dynamic
@@ -12,6 +15,13 @@ the dagit airbyte software defined asset function doesnt support adding input de
 
 The work around is to generate the `AssetDefintion` for airbyte manually and pass input `AssetDefinition`. I couldnt alter `build_airbyte_assets()` to take an input `AssetDefinition` because the asset creation via `@Asset` decorator uses the params names e.g. *args instead of the original name of the `AssetDefinition`.
 
+# To show off
+## Dagster
+- `local development speed`: pipenv install -e and update code that is imediatly available to execute in UI
+- pipeline and business logic de coupling, you can `swap resources and IOManagers`
+- Restart from a particular point
+- `Asset aware` its not just pipelines. Dagster also knows what its pipelines are generating.
+- Metadata e.g. tests results
 
 # Fake data
 

@@ -1,18 +1,18 @@
 with source as (
     select 
         "Event ID",
-        _airbyte_unique_key,
         email,
         "End Date",
-        _ab_source_file_url,
+        "Subscription Termination Reason"
+        {# _ab_source_file_url,
         _ab_additional_properties,
         _ab_source_file_last_modified,
-        "Subscription Termination Reason",
+        _airbyte_unique_key,
         _airbyte_ab_id,
         _airbyte_emitted_at,
         _airbyte_normalized_at,
-        _airbyte_fake_sub_deactivate_hashid
-    from {{ source('public', 'fake_sub_deactivate') }}
+        _airbyte_fake_sub_deactivate_hashid #}
+    from {{ source('website', 'sub_deactivate') }}
 )
 , renamed as (
     select 

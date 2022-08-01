@@ -1,7 +1,6 @@
 with source as (
     select 
         "Event ID",
-        _airbyte_unique_key,
         city,
         email,
         "Last Name",
@@ -9,15 +8,16 @@ with source as (
         "First Name",
         "Start Date",
         nationality,
-        "Subscription Type",
-        _ab_source_file_url,
+        "Subscription Type"
+        {# _ab_source_file_url,
         _ab_additional_properties,
+        _airbyte_unique_key,
         _ab_source_file_last_modified,
         _airbyte_ab_id,
         _airbyte_emitted_at,
         _airbyte_normalized_at,
-        _airbyte_fake_sub_activate_hashid
-    from {{ source('public', 'fake_sub_activate') }}
+        _airbyte_fake_sub_activate_hashid #}
+    from {{ source('website', 'sub_activate') }}
 )
 , renamed as (
     select 

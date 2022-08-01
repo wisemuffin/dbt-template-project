@@ -7,6 +7,7 @@ import csv
 # from datetime import datetime, date, timedelta
 import datetime
 from typing import Dict
+from dagster_pandas import DataFrame
 import pandas as pd
 from faker import Faker
 import random
@@ -215,19 +216,12 @@ def generate_fake_data() -> Dict[str, pd.DataFrame]:
         # df_fake_web_events.head()
 
 
-        # df_fake_content.to_csv(f'{PATH_TO_FAKE_DATA}/fake_content_{file_partition}.csv', index=False)
-        # df_fake_data_employees.to_csv(f'{PATH_TO_FAKE_DATA}/fake_data_employees_{file_partition}.csv', index=False)
-        # df_fake_sub_activate.to_csv(f'{PATH_TO_FAKE_DATA}/fake_sub_activate_{file_partition}.csv', index=False)
-        # df_fake_sub_deactivate.to_csv(f'{PATH_TO_FAKE_DATA}/fake_sub_deactivate_{file_partition}.csv', index=False)
-        # df_fake_web_events.to_csv(f'{PATH_TO_FAKE_DATA}/fake_web_events_{file_partition}.csv', index=False)
+        df_fake_content.to_csv(f'{PATH_TO_FAKE_DATA}/fake_content_{file_partition}.csv', index=False)
+        df_fake_data_employees.to_csv(f'{PATH_TO_FAKE_DATA}/fake_data_employees_{file_partition}.csv', index=False)
+        df_fake_sub_activate.to_csv(f'{PATH_TO_FAKE_DATA}/fake_sub_activate_{file_partition}.csv', index=False)
+        df_fake_sub_deactivate.to_csv(f'{PATH_TO_FAKE_DATA}/fake_sub_deactivate_{file_partition}.csv', index=False)
+        df_fake_web_events.to_csv(f'{PATH_TO_FAKE_DATA}/fake_web_events_{file_partition}.csv', index=False)
 
-        return {
-            "fake_content": df_fake_content,
-            "fake_data_employees": df_fake_data_employees,
-            "fake_sub_activate": df_fake_sub_activate,
-            "fake_sub_deactivate": df_fake_sub_deactivate,
-            "fake_web_events": df_fake_web_events
-        }
 
 # %%
 

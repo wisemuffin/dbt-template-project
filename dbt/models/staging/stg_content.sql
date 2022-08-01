@@ -5,15 +5,15 @@ with source as (
         "Sub Genre",
         instrument,
         "Content Name",
-        "Instrument Category",
-        _ab_source_file_url,
+        "Instrument Category"
+        {# _ab_source_file_url,
         _ab_additional_properties,
         _ab_source_file_last_modified,
         _airbyte_ab_id,
         _airbyte_emitted_at,
         _airbyte_normalized_at ,
-        _airbyte_fake_content_hashid
-    from {{ source('public', 'fake_content') }}
+        _airbyte_fake_content_hashid #}
+    from {{ source('website', 'content') }}
 )
 , renamed as (
     select 
