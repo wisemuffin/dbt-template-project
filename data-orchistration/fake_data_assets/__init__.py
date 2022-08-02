@@ -16,7 +16,7 @@ from dagster.utils import file_relative_path
 
 # from .sensors.slack_on_failure_sensor import make_slack_on_failure_sensor
 
-DBT_PROJECT_DIR = file_relative_path(__file__, "../../fake_data_dbt")
+DBT_PROJECT_DIR = file_relative_path(__file__, "../../data-transformation/fake_data_dbt")
 DBT_PROFILES_DIR = DBT_PROJECT_DIR + "/config"
 
 dbt_assets = load_assets_from_dbt_manifest(

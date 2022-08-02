@@ -15,20 +15,20 @@ from dagster.utils import file_relative_path
 
 from hacker_news_assets.sensors.slack_on_failure_sensor import make_slack_on_failure_sensor
 
-DBT_PROJECT_DIR = file_relative_path(__file__, "../../hacker_news_dbt")
+DBT_PROJECT_DIR = file_relative_path(__file__, "../../data-transformation/hacker_news_dbt")
 DBT_PROFILES_DIR = DBT_PROJECT_DIR + "/config"
 
-# dbt_assets = load_assets_from_dbt_manifest(
-#     json.load(open(os.path.join(DBT_PROJECT_DIR, "target", "manifest.json"), encoding="utf-8")),
-#     io_manager_key="warehouse_io_manager",
-#     # the schemas are already specified in dbt, so we don't need to also specify them in the key
-#     # prefix here
-#     key_prefix=["snowflake"],
-#     source_key_prefix=["snowflake"],
-# )
+dbt_assets = load_assets_from_dbt_manifest(
+    json.load(open(os.path.join(DBT_PROJECT_DIR, "target", "manifest.json"), encoding="utf-8")),
+    io_manager_key="warehouse_io_manager",
+    # the schemas are already specified in dbt, so we don't need to also specify them in the key
+    # prefix here
+    key_prefix=["snowflake"],
+    source_key_prefix=["snowflake"],
+)
 
-all_assets = [*core_assets] #, *recommender_assets, *dbt_assets, *activity_analytics_assets]
-all_jobs = [core_assets_schedule] #, activity_analytics_assets_sensor, recommender_assets_sensor]
+all_assets = [*core_assets, *recommender_assets, *dbt_assets, *activity_analytics_assets]
+all_jobs = [core_assets_schedule, activity_analytics_assets_sensor, recommender_assets_sensor]
 
 resource_defs_by_deployment_name = {
     "prod": RESOURCES_PROD,

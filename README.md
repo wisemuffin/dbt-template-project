@@ -5,6 +5,7 @@
 - clean up repo for orchistration
 
 ## Nice to do
+- duckdb need to create schema every time i delete the db. How to allow creating schema at same time?
 - currently using s3 client has no type hints. Could use https://pypi.org/project/boto3-stubs/
 - simplify airbyte dependencies
 - make the fake data generator `path_to_fake_data` dynamic
