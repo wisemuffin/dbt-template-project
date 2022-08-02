@@ -1,9 +1,19 @@
 load_from:
   - python_package:
       package_name: modern_data_stack_assets
+  # - python_package:
+  #     package_name: fake_data_assets
+  # - python_package:
+  #     package_name: hacker_news_assets
       # Scopes down the repository to use in this Dagster deployment - this can be varied in
       # different environments to allow the same code to be used in different environments
     #   attribute: mds_repo
+  # - python_package:
+  #     package_name: modern_data_stack_assets
   # - python_file:
   #     relative_path: modern_data_stack_assets/example/example_assets_s3.py
   #     attribute: s3_example_repo
+  # - python_package:
+  #     package_name: hacker_news_assets
+  # - python_package:
+  #     package_name: fake_data_assets

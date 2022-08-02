@@ -5,7 +5,7 @@ from dagster import AssetMaterialization, asset, build_op_context, job, load_ass
 from dagster_aws.s3 import s3_resource
 from dagster.utils import file_relative_path
 
-from modern_data_stack_assets.constants import S3_FAKE_DATA_CONFIG,LOCAL_FAKE_DATA_PATH
+from modern_data_stack_assets_old.constants import S3_FAKE_DATA_CONFIG,LOCAL_FAKE_DATA_PATH
 
 # This example show how to turn the s3 session for an op into an asset materialization
 # export bucket=dbt-template-project-data; # change this to your own bucket
