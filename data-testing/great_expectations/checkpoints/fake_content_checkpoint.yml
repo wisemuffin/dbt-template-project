@@ -26,7 +26,7 @@ validations:
       data_asset_name: part-00000-d447f04d-2c7c-4ebc-b043-5647e81a0ffd-c000.snappy.parquet
       data_connector_query:
         index: -1
-    expectation_suite_name: content.snappy.parquet.warning
+    expectation_suite_name: content.warning
 profilers: []
 ge_cloud_id:
 expectation_suite_ge_cloud_id:
