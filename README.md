@@ -1,8 +1,12 @@
 # TODO
+- dbt metrics layer
+- re data for monitoring / 
+- maybe just run great expectations at end
+- soda at end
+- slim CICD for dbt layer
 - sometimes getting failures due to locks on duckdb - look for retry logic
 - airbyte dagster have removed for now - will add in for other API data
-- add in hacker news
-- clean up repo for orchistration
+- great expectations on assets - waiting for dagster blog post
 
 ## Nice to do
 - duckdb need to create schema every time i delete the db. How to allow creating schema at same time?
