@@ -39,6 +39,7 @@ setup(
         "pyspark",
         "requests",
         "gcsfs",
+        "great-expectations",
         "fsspec",
         "s3fs",
         "scipy",

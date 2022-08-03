@@ -1,0 +1,456 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "part-00000-d447f04d-2c7c-4ebc-b043-5647e81a0ffd-c000.snappy.parquet.warning",
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "kwargs": {
+        "column_list": [
+          "Content Name",
+          "Content ID",
+          "Genre",
+          "Sub Genre",
+          "Instrument",
+          "Instrument Category",
+          "Email"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {
+        "max_value": 30,
+        "min_value": 30
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "Content Name",
+        "value_set": [
+          "aperiam",
+          "architecto",
+          "aspernatur",
+          "atque",
+          "consequuntur",
+          "dolores",
+          "eius",
+          "fuga",
+          "incidunt",
+          "inventore",
+          "maxime",
+          "nihil",
+          "nisi",
+          "officiis",
+          "omnis",
+          "perferendis",
+          "placeat",
+          "qui",
+          "reiciendis",
+          "rem",
+          "rerum",
+          "sed",
+          "sint",
+          "suscipit",
+          "tempore",
+          "tenetur",
+          "voluptas",
+          "voluptates"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "Content Name"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": {
+        "column": "Content Name",
+        "max_value": 0.9333333333333333,
+        "min_value": 0.9333333333333333
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "kwargs": {
+        "column": "Content Name",
+        "type_list": [
+          "CHAR",
+          "NCHAR",
+          "VARCHAR",
+          "NVARCHAR",
+          "TEXT",
+          "NTEXT",
+          "STRING",
+          "StringType",
+          "string",
+          "str",
+          "object",
+          "dtype('O')"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "Content ID"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": {
+        "column": "Content ID",
+        "max_value": 1.0,
+        "min_value": 1.0
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "kwargs": {
+        "column": "Content ID",
+        "type_list": [
+          "CHAR",
+          "NCHAR",
+          "VARCHAR",
+          "NVARCHAR",
+          "TEXT",
+          "NTEXT",
+          "STRING",
+          "StringType",
+          "string",
+          "str",
+          "object",
+          "dtype('O')"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "Genre",
+        "value_set": [
+          "Anime",
+          "Children\u2019s Music",
+          "Classical",
+          "Comedy",
+          "Country",
+          "Electronic",
+          "Fitness & Workout",
+          "Folk Music",
+          "French Pop",
+          "Indie Pop",
+          "Instrumental",
+          "J-Pop",
+          "K-Pop",
+          "Karaoke",
+          "Metal",
+          "New Age",
+          "R&B/Soul",
+          "Soundtrack",
+          "Spoken Word",
+          "Tex-Mex",
+          "World"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "Genre"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": {
+        "column": "Genre",
+        "max_value": 0.7,
+        "min_value": 0.7
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "kwargs": {
+        "column": "Genre",
+        "type_list": [
+          "CHAR",
+          "NCHAR",
+          "VARCHAR",
+          "NVARCHAR",
+          "TEXT",
+          "NTEXT",
+          "STRING",
+          "StringType",
+          "string",
+          "str",
+          "object",
+          "dtype('O')"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "Sub Genre",
+        "value_set": [
+          "Adult Contemporary",
+          "Background",
+          "Ballet",
+          "Canadian Blues",
+          "Chicano",
+          "Choral",
+          "Christmas: Religious",
+          "Classic",
+          "Crossover Jazz",
+          "Electro-swing",
+          "Electroswing",
+          "Golden Age",
+          "Holiday: Other",
+          "Indie Rock",
+          "Jingles",
+          "Levenslied",
+          "March",
+          "Math Rock",
+          "Metal",
+          "Musique Concr\u00e8te",
+          "Progressive Techno",
+          "Soul Blues",
+          "Southern Gospel",
+          "Sung Poetry",
+          "TV Soundtrack",
+          "Tex-Mex",
+          "Traditional Folk"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "Sub Genre"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": {
+        "column": "Sub Genre",
+        "max_value": 0.9,
+        "min_value": 0.9
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "kwargs": {
+        "column": "Sub Genre",
+        "type_list": [
+          "CHAR",
+          "NCHAR",
+          "VARCHAR",
+          "NVARCHAR",
+          "TEXT",
+          "NTEXT",
+          "STRING",
+          "StringType",
+          "string",
+          "str",
+          "object",
+          "dtype('O')"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "Instrument"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": {
+        "column": "Instrument",
+        "max_value": 1.0,
+        "min_value": 1.0
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "kwargs": {
+        "column": "Instrument",
+        "type_list": [
+          "CHAR",
+          "NCHAR",
+          "VARCHAR",
+          "NVARCHAR",
+          "TEXT",
+          "NTEXT",
+          "STRING",
+          "StringType",
+          "string",
+          "str",
+          "object",
+          "dtype('O')"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "Instrument Category",
+        "value_set": [
+          "electronics",
+          "percussion",
+          "strings",
+          "winds"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "Instrument Category"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": {
+        "column": "Instrument Category",
+        "max_value": 0.13333333333333333,
+        "min_value": 0.13333333333333333
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "kwargs": {
+        "column": "Instrument Category",
+        "type_list": [
+          "CHAR",
+          "NCHAR",
+          "VARCHAR",
+          "NVARCHAR",
+          "TEXT",
+          "NTEXT",
+          "STRING",
+          "StringType",
+          "string",
+          "str",
+          "object",
+          "dtype('O')"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "Email",
+        "value_set": [
+          "christie.farmer@fake_domain-2.com",
+          "christina.moore@fake_domain-2.com",
+          "ethan.villegas@fake_domain-2.com",
+          "sarah.wright@fake_domain-2.com"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "Email"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": {
+        "column": "Email",
+        "max_value": 0.13333333333333333,
+        "min_value": 0.13333333333333333
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "kwargs": {
+        "column": "Email",
+        "type_list": [
+          "CHAR",
+          "NCHAR",
+          "VARCHAR",
+          "NVARCHAR",
+          "TEXT",
+          "NTEXT",
+          "STRING",
+          "StringType",
+          "string",
+          "str",
+          "object",
+          "dtype('O')"
+        ]
+      },
+      "meta": {}
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "citations": [
+      {
+        "batch_request": {
+          "data_asset_name": "part-00000-d447f04d-2c7c-4ebc-b043-5647e81a0ffd-c000.snappy.parquet",
+          "data_connector_name": "default_inferred_data_connector_name",
+          "datasource_name": "fake_content",
+          "limit": 1000
+        },
+        "citation_date": "2022-08-03T06:55:44.921653Z",
+        "comment": "Created suite added via CLI"
+      }
+    ],
+    "columns": {
+      "Content ID": {
+        "description": ""
+      },
+      "Content Name": {
+        "description": ""
+      },
+      "Email": {
+        "description": ""
+      },
+      "Genre": {
+        "description": ""
+      },
+      "Instrument": {
+        "description": ""
+      },
+      "Instrument Category": {
+        "description": ""
+      },
+      "Sub Genre": {
+        "description": ""
+      }
+    },
+    "great_expectations_version": "0.15.16"
+  }
+}
