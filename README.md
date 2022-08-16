@@ -28,16 +28,6 @@ The work around is to generate the `AssetDefintion` for airbyte manually and pas
 - `Asset aware` its not just pipelines. Dagster also knows what its pipelines are generating.
 - Metadata e.g. tests results
 
-# Fake data
-
-Generates a bunch of csv files in `fake-data-generation/fake-data/` related to our music subscription example project.
-
-```bash
-cd fake-data-generation
-pipenv install
-python generate_fake_data.py
-```
-
 
 # data lake
 
@@ -78,21 +68,61 @@ cd airbyte
 docker-compose up
 ```
 
-Setup one source for each table:
-
-- fake_content
-- fake_data_employees
-- fake_sub_activate
-- fake_sub_deactivate
-- fake_web_events
-
-pattern of files to replicate
-*fake_content*.csv
-*fake_data_employees*.csv
-*fake_sub_activate*.csv
-*fake_sub_deactivate*.csv
-*fake_web_events*.csv
 
 # Data Orchistration
 
 See data-orchistration/README.md
+
+# Data Monitoring
+
+```bash
+cd ./data-transformation/fake_data_dbt;
+dbt run --models package:re_data;
+```
+
+***cant generate website not supported with duckdb*** Catalog Error: Scalar Function with name date does not exist!
+```bash
+re_data overview generate --start-date 2022-08-15 --interval days:1;
+re_data overview serve;
+```
+
+## workaround re_data & duckdb compatibility issues
+***this doesnt fix*** the issue when running re_data overview generate
+
+error when using re_data and duckdb when creating re_data_last_stats:
+
+Error: Parser Error: ORDER BY is not implemented for window functions!
+
+work around add:
+
+/home/dave/data-engineering/dbt-template-project/data-transformation/fake_data_dbt/dbt_packages/fivetran_utils/macros/percentile.sql
+
+```sql
+{% macro duckdb__percentile(percentile_field, partition_field, percent)  %}
+
+    quantile_cont( 
+        {{ percentile_field }}, 
+        {{ percent }}) 
+        over (partition by {{ partition_field }}    
+        )
+
+{% endmacro %}
+```
+
+/home/dave/data-engineering/dbt-template-project/data-transformation/fake_data_dbt/dbt_packages/re_data/macros/db/core/split_and_return_nth_value.sql
+
+```sql
+{% macro duckdb__split_and_return_nth_value(column_name, delimiter, ordinal) -%}
+    str_split({{ re_data.clean_blacklist(column_name, ['"', '`'], '') }}, '{{ delimiter }}', {{ ordinal }})[2]
+{%- endmacro %}
+```
+
+comment out
+in: /home/dave/data-engineering/dbt-template-project/data-transformation/fake_data_dbt/dbt_packages/re_data/models/alerts/re_data_anomalies.sql
+
+```jinja
+    'turned off workaround dg' as message,
+    'turned off workaround dg' as last_value_text
+    {# {{ re_data.generate_anomaly_message('z.column_name', 'z.metric', 'z.last_value', 'z.last_avg') }} as message,
+    {{ re_data.generate_metric_value_text('z.metric', 'z.last_value') }} as last_value_text #}
+```
