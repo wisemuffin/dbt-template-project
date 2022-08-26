@@ -67,7 +67,8 @@ def fake_data_generation_content(current_timestamp, records, fake_data_employees
                 "Sub Genre": fake.music_subgenre(),
                 "Instrument": fake.music_instrument(),
                 "Instrument Category": fake.music_instrument_category(),
-                "Email": fake_data_employees[rnd_emp]['Email']
+                "Email": fake_data_employees[rnd_emp]['Email'],
+                "effective_from_ts": current_timestamp
                 })
         
     return content
@@ -96,7 +97,8 @@ def fake_data_generation_employees(current_timestamp, records):
                 "Salary": random.randrange(75000,150000, 5000),
                 "City" : fake.city(),
                 "Nationality" : fake.country(),
-                "Skill": fake.skills()
+                "Skill": fake.skills(),
+                "effective_from_ts": current_timestamp
                 })
         
     return employee
@@ -124,7 +126,8 @@ def fake_data_generation_subscription_events(current_timestamp, records):
                 "Start Date": current_timestamp - + datetime.timedelta(hours=n),
                 "City" : fake.city(),
                 "Nationality" : fake.country(),
-                "Subscription Type": fake.subscription_type()
+                "Subscription Type": fake.subscription_type(),
+                "effective_from_ts": current_timestamp
                 })
         
     return subscription_events
@@ -145,7 +148,8 @@ def fake_data_generation_subscription_deactivate_events(current_timestamp, recor
                 "Event ID": fake.uuid4(),
                 "Email": i['Email'],
                 "End Date": i["Start Date"] + datetime.timedelta(hours=n),
-                "Subscription Termination Reason": fake.subscription_termination_reason()
+                "Subscription Termination Reason": fake.subscription_termination_reason(),
+                "effective_from_ts": current_timestamp
                 })
         
     return subscription_events
@@ -177,7 +181,8 @@ def fake_data_web_events(current_timestamp, records, content):
                     "Event Start": event_start,
                     "Event End": event_start + datetime.timedelta(seconds=n*60) if event_type == 'content_viewed' else None,
                     "Web Event Type": event_type,
-                    "Content ID": content[random.randint(0,content_len-1)]['Content ID'] if 'content' in event_type else None
+                    "Content ID": content[random.randint(0,content_len-1)]['Content ID'] if 'content' in event_type else None,
+                    "effective_from_ts": current_timestamp
                     })
         
     return web_events

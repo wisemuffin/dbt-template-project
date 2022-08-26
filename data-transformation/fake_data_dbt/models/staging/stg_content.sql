@@ -1,11 +1,12 @@
 with source as (
     select 
         "Content ID",
-        genre,
+        "Genre",
         "Sub Genre",
-        instrument,
+        "Instrument",
         "Content Name",
-        "Instrument Category"
+        "Instrument Category",
+        effective_from_ts
         {# _ab_source_file_url,
         _ab_additional_properties,
         _ab_source_file_last_modified,
@@ -18,9 +19,9 @@ with source as (
 , renamed as (
     select 
         "Content ID" as Content_ID,
-        genre,
+        "Genre" as genre,
         "Sub Genre" as Sub_Genre,
-        instrument,
+        "Instrument" instrument,
         "Content Name" as Content_Name,
         "Instrument Category" as Instrument_Categor
     from source

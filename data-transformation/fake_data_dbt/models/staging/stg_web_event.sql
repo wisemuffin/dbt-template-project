@@ -7,11 +7,12 @@
 with source as (
     select 
         "Event End",
-        email,
+        "Email",
         "Content ID",
         "Event ID",
         "Event Start",
-        "Web Event Type"
+        "Web Event Type",
+        effective_from_ts
         {# _ab_source_file_url,
         _ab_additional_properties,
         _ab_source_file_last_modified,
@@ -25,7 +26,7 @@ with source as (
 , renamed as (
     select 
         "Event End" as Event_End,
-        email,
+        "Email" as email,
         "Content ID" as Content_ID,
         "Event ID" as Event_ID,
         "Event Start" as Event_Start,

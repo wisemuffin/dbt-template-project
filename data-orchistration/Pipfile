@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 modern-data-stack-assets = {editable = true, path = "."}
+dbt-snowflake = "*"
 
 [dev-packages]
 

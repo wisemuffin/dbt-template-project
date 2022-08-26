@@ -69,7 +69,18 @@ def repo_re_data():
     return definitions
 
 if __name__ == "__main__":
-    deployment_name = os.environ.get("DAGSTER_DEPLOYMENT", "local")
+    # deployment_name = os.environ.get("DAGSTER_DEPLOYMENT", "local")
+    deployment_name = "prod"
+    print(f"environment: {deployment_name}")
+
+    SHARED_SNOWFLAKE_CONF = {
+        "account": os.getenv("DBT_TEMPLATE_PROJECT_SNOWFLAKE_ACCOUNT", ""),
+        "user": os.getenv("DBT_TEMPLATE_PROJECT_SNOWFLAKE_USER", ""),
+        "password": os.getenv("DBT_TEMPLATE_PROJECT_SNOWFLAKE_PASSWORD", ""),
+        "warehouse": os.getenv("DBT_TEMPLATE_PROJECT_SNOWFLAKE_WH", ""),
+    }
+    print(f"snowflake config: {SHARED_SNOWFLAKE_CONF}")
+
     resource_defs = resource_defs_by_deployment_name[deployment_name]
     definitions = with_resources(all_assets, resource_defs)
-    materialize(definitions)
+    materialize(definitions, partition_key="2022-08-26-04:00")

@@ -1,4 +1,11 @@
 # TODO
+- datahub 
+    - dbt 
+        - source freshness (sources) and 
+        - test results
+        - docs
+        - missing lineage
+    - great expecation validation
 - dbt metrics layer
 - re data for monitoring / 
 - maybe just run great expectations at end
@@ -7,6 +14,7 @@
 - sometimes getting failures due to locks on duckdb - look for retry logic
 - airbyte dagster have removed for now - will add in for other API data
 - great expectations on assets - waiting for dagster blog post
+- switch s3 to mino
 
 ## Nice to do
 - duckdb need to create schema every time i delete the db. How to allow creating schema at same time?
@@ -21,6 +29,7 @@ the dagit airbyte software defined asset function doesnt support adding input de
 The work around is to generate the `AssetDefintion` for airbyte manually and pass input `AssetDefinition`. I couldnt alter `build_airbyte_assets()` to take an input `AssetDefinition` because the asset creation via `@Asset` decorator uses the params names e.g. *args instead of the original name of the `AssetDefinition`.
 
 # To show off
+
 ## Dagster
 - `local development speed`: pipenv install -e and update code that is imediatly available to execute in UI
 - pipeline and business logic de coupling, you can `swap resources and IOManagers`
@@ -47,6 +56,7 @@ aws s3 rm s3://${bucket} --recursive
 # Data Warehouse
 
 ```bash
+cd data-infra
 docker-compose -f docker-compose.postgres-wh.yml up
 ```
 
@@ -55,8 +65,9 @@ docker start dbt-template-project_postgres_1
 
 # Airbyte
 
-Spin up an airflow instance.
+Spin up an airbyte instance.
 ```bash
+cd data-infra
 docker-compose -f docker-compose.airbyte.yml up
 ```
 

@@ -29,10 +29,10 @@ def spark_field_to_snowflake_type(spark_field: StructField):
 
 
 SHARED_SNOWFLAKE_CONF = {
-    "account": os.getenv("SNOWFLAKE_ACCOUNT", ""),
-    "user": os.getenv("SNOWFLAKE_USER", ""),
-    "password": os.getenv("SNOWFLAKE_PASSWORD", ""),
-    "warehouse": "TINY_WAREHOUSE",
+    "account": os.getenv("DBT_TEMPLATE_PROJECT_SNOWFLAKE_ACCOUNT", ""),
+    "user": os.getenv("DBT_TEMPLATE_PROJECT_SNOWFLAKE_USER", ""),
+    "password": os.getenv("DBT_TEMPLATE_PROJECT_SNOWFLAKE_PASSWORD", ""),
+    "warehouse": os.getenv("DBT_TEMPLATE_PROJECT_SNOWFLAKE_WH", ""),
 }
 
 
@@ -187,7 +187,7 @@ class SnowflakeIOManager(IOManager):
 
     def _time_window_where_clause(self, time_window: Tuple[datetime, datetime]) -> str:
         start_dt, end_dt = time_window
-        return f"""WHERE TO_TIMESTAMP(time::INT) BETWEEN '{start_dt.strftime(SNOWFLAKE_DATETIME_FORMAT)}' AND '{end_dt.strftime(SNOWFLAKE_DATETIME_FORMAT)}'"""
+        return f"""WHERE TO_TIMESTAMP(effective_from_ts) BETWEEN '{start_dt.strftime(SNOWFLAKE_DATETIME_FORMAT)}' AND '{end_dt.strftime(SNOWFLAKE_DATETIME_FORMAT)}'"""
 
 
 def pandas_columns_to_markdown(dataframe: PandasDataFrame) -> str:

@@ -1,9 +1,10 @@
 with source as (
     select 
         "Event ID",
-        email,
+        "Email",
         "End Date",
-        "Subscription Termination Reason"
+        "Subscription Termination Reason",
+        effective_from_ts
         {# _ab_source_file_url,
         _ab_additional_properties,
         _ab_source_file_last_modified,
@@ -17,7 +18,7 @@ with source as (
 , renamed as (
     select 
         "Event ID" AS Event_ID,
-        email,
+        "Email" as email,
         "End Date" as End_Date,
         "Subscription Termination Reason" as Subscription_Termination_Reason
     from source
