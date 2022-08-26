@@ -38,7 +38,9 @@ The work around is to generate the `AssetDefintion` for airbyte manually and pas
 - Metadata e.g. tests results
 
 
-# data lake
+# Data Lake
+
+## legacy load into data lake
 
 create a bucket in your s3 account and load data after generating `fake data` in the above step.
 
@@ -53,7 +55,7 @@ clean up
 aws s3 rm s3://${bucket} --recursive
 ```
 
-# Data Warehouse
+# Data Warehouse [Legeacy]
 
 ```bash
 cd data-infra
@@ -78,7 +80,11 @@ git clone https://github.com/airbytehq/airbyte.git
 cd airbyte
 docker-compose up
 ```
+# Data transofmation
 
+## dbt yaml
+
+[vscode setup for autocomplete](https://github.com/dbt-labs/dbt-jsonschema)
 
 # Data Orchistration
 
