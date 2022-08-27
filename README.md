@@ -1,10 +1,7 @@
 # TODO
 - datahub 
     - dbt 
-        - source freshness (sources) and 
-        - test results
         - docs
-        - missing lineage
     - great expecation validation
 - dbt metrics layer
 - re data for monitoring / 
@@ -80,7 +77,10 @@ git clone https://github.com/airbytehq/airbyte.git
 cd airbyte
 docker-compose up
 ```
-# Data transofmation
+# Data transofmation dbt
+
+limiations
+- dbt does not support freshness of non sources: https://github.com/dbt-labs/dbt-core/issues/3862
 
 ## dbt yaml
 
@@ -89,6 +89,14 @@ docker-compose up
 # Data Orchistration
 
 See data-orchistration/README.md
+
+# Data Catalog
+
+## Datahub
+
+Limitations
+- dbt source freshness no longer working https://feature-requests.datahubproject.io/p/support-dbt-source-freshness
+
 
 # Data Monitoring
 

@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: stg_web_event
+    description: events that occur on our website
+    columns:
+      - name: email
+        description: its an email aaaalright!
+        tests:
+          - not_null
+      - name: Event_ID
+        description: uuid for each event
+        tests:
+          - not_null
+          - unique

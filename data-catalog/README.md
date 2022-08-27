@@ -27,5 +27,8 @@ datahub docker quickstart --restore
 # Data ingestion
 
 ```bash
+dbt compile --exclude re_data
+dbt docs generate --no-compile
+
 datahub ingest -c fake_data_dbt_to_datahub.dhub.yaml
 ```
