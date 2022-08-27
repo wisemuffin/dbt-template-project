@@ -32,3 +32,8 @@ clean-targets: # directories to be removed by `dbt clean`
 models:
   dbt_template_project:
     materialized: table
+
+vars:
+  # re_data enables you to store dbt tests results to investigate them
+  # later on. You can enable this functionality by setting:
+  re_data:save_test_history: true

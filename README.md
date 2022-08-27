@@ -96,7 +96,7 @@ See data-orchistration/README.md
 
 Limitations
 - dbt source freshness no longer working https://feature-requests.datahubproject.io/p/support-dbt-source-freshness
-
+- re_data is stopping descriptions and tests getting updated.
 
 # Data Monitoring
 

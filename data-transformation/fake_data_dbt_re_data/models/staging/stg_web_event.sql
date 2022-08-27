@@ -1,3 +1,9 @@
+{{
+    config(
+      re_data_monitored=true,
+      re_data_time_filter='Event_Start',
+    )
+}}
 with source as (
     select 
         "Event End",
